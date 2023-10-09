@@ -84,5 +84,26 @@ git push -u origin dev
 git fetch origin --prune --verbose
 git branch -a //wip deleted 
 
+=================================================
+how to create a wip branch and delete it later
+=================================================
+git checkout -b wip_test
+//make changes in wip_test
+git status
+git branch -m wip_test wip_swagger_updates //optional name change
+git add .
+git commit -m "Updated: SwaggerConfig.java" -m "Added new functionalities for swagger to make APIs more self-descriptive"
+git push -u origin wip_swagger_updates --verbose
+//make more changes
+git push origin wip_swagger_updates --verbose
+[now send a merge request to dev and delete the branch]
+git checkout dev
+git branch -d wip_swagger_updates //deleted from local
+git fetch origin --prune --verbose
+git pull origin dev --rebase --verbose
+
+
+
+
 
 
