@@ -1,0 +1,88 @@
+1) git push origin dev --verbose
+
+2) git diff master dev //q to exit
+git diff master dev --name-only
+
+3) git log --all --graph --pretty //shows commit history in a descriptive way
+
+4) git rm -r --cached *target*  //removes all files in target folder from local
+
+5) git log
+
+6) git rm -r --cached .factorypath //removes from storage area
+
+7*) git commit --amend --no-edit  //never use it for shared repos as it will modify SHA, basically used to modify the same commit if you missed a file or something
+
+8) Creating a new branch through command prompt steps:
+
+a) git branch -a //see all branches local and remote
+b) git checkout -b wip
+c) eval `ssh-agent -s`
+d) ssh-add -k C:/Users/prerna.dutta/.ssh/id_ecdsa
+e) git push -u origin wip --verbose
+git push -u origin wip --verbose (twice as first time it fails)
+
+9) history | grep "git " > "C:\Users\prerna.dutta\Desktop\Cordis\git\commands.txt" 
+
+// git log basically keeps track of all local commits
+
+10) git log --graph --pretty=format:'%C(yellow)%h%Creset-%s %C(green)(%cr) %C(red)%ad%Creset %C(bold blue)<%an>%Creset' --abbrev-commit --date=short
+
+11) git log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short
+
+12) git log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=short
+
+-----------------------------------------------------------------------------------------------------------------------------------
+13) git show f061d00 //first 7-8 chars of commit ids
+
+14) git log --oneline
+
+15) git checkout -b newbranch //create and checkout to new branch
+
+git branch <wip_branch_name> 
+git checkout <wip_branch_name>
+
+or,
+
+git checkout -b wip_branch_name
+
+16) //leave for now 
+git pull origin dev --rebase --verbose
+
+================================
+[dev was replaced with wip:]
+================================
+git branch -m dev old_dev //create a new branch old_dev to keep backup
+git branch -a //we are in old_dev now
+----------------------------------
+  dev1
+  master
+* old_dev
+  wip
+  remotes/origin/dev
+  remotes/origin/dev1
+  remotes/origin/master
+  remotes/origin/wip
+----------------------------------
+git push -u origin old_dev --verbose //first time pushing so establish upstream for old_dev
+git checkout wip
+git push origin wip --verbose (it was ahead by 2 commits)
+//now in gitlab go to repository-> branches and delete wip branch
+git fetch origin --verbose 
+--------------------------------------------------
+From 192.168.1.63:pushcord/api/pushcord-sms
+ = [up to date]      wip        -> origin/wip
+ = [up to date]      dev1       -> origin/dev1
+ = [up to date]      master     -> origin/master
+ = [up to date]      old_dev    -> origin/old_dev
+--------------------------------------------------
+still visible so prune it...
+
+git fetch origin --prune --verbose
+git branch -m wip dev
+git push -u origin dev
+git fetch origin --prune --verbose
+git branch -a //wip deleted 
+
+
+
